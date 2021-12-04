@@ -35,10 +35,10 @@
 			<tr style="text-align:right;">
 				<td colspan="2">
 					<input type="button" value="수정" onclick="location.href='updateBoard?board_no=${board.board_no}'">
-					<form action="board" method="post">
+					<form style="display:inline" action="board" method="post">
 						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
 						<input type="submit" value="삭제">
+						<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
 					</form>
 				</td>
 			</tr>
@@ -60,28 +60,36 @@
 						<span>+</span>
 					</c:forEach>
 					<c:out value="${i.comment_content}"/>
-					<form style="display:inline;" action="comment2" method="post">
-						<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
-						<input type="hidden" name="comment_parent" value="<c:out value='${i.comment_no }' />">
-						<input type="hidden" name="comment_depth" value="<c:out value='${i.comment_depth + 1 }' />">
-						<input type="hidden" name="comment_seq" value="<c:out value='${i.comment_seq + 1}' />">
-						<input type="hidden" name="member_id" value="<c:out value='test' />">
-						<textarea name="comment_content" cols="100"></textarea>
-						<input  type="submit" value="댓글 달기" >
-					</form>
-					<form style="display:inline;" action="comment" method="post">
-						<input type="hidden" name="_method" value="put">
-						<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
-						<input type="hidden" name="comment_no" value="${i.comment_no }">
-						<textarea name="comment_content" cols="100"></textarea>	
-						<input type="submit" value="댓글 수정">
-					</form>
-					<form style="display:inline;" action="deleteComment" method="post">
-						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
-						<input type="hidden" name="comment_no" value="${i.comment_no }">
-						<input type="submit" value="댓글 삭제">
-					</form>
+					<div style="text-align:center">
+						<div>
+							<form style="display:inline;" action="comment2" method="post">
+								<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
+								<input type="hidden" name="comment_parent" value="<c:out value='${i.comment_no }' />">
+								<input type="hidden" name="comment_depth" value="<c:out value='${i.comment_depth + 1 }' />">
+								<input type="hidden" name="comment_seq" value="<c:out value='${i.comment_seq + 1}' />">
+								<input type="hidden" name="member_id" value="<c:out value='${sessionScope.member.member_id }' />">
+								<textarea name="comment_content" cols="100"></textarea>
+								<input  type="submit" value="댓글 달기" >
+							</form>
+						</div>
+						<div>
+							<form style="display:inline;" action="comment" method="post">
+								<input type="hidden" name="_method" value="put">
+								<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
+								<input type="hidden" name="comment_no" value="${i.comment_no }">
+								<textarea name="comment_content" cols="100"></textarea>	
+								<input type="submit" value="댓글 수정">
+							</form>
+						</div>
+					</div>
+					<div>
+						<form style="display:inline;" action="comment" method="post">
+							<input type="hidden" name="_method" value="delete">	
+							<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">
+							<input type="hidden" name="comment_no" value="${i.comment_no }">
+							<input type="submit" value="댓글 삭제">
+						</form>
+					</div>
 					</td>
 				</tr>
 			</c:forEach>
@@ -92,7 +100,7 @@
 						<input type="hidden" name="board_no" value="<c:out value='${board.board_no }' />">						
 						<input type="hidden" name="comment_depth" value="<c:out value='1' />">
 						<input type="hidden" name="comment_seq" value="<c:out value='1' />">
-						<input type="hidden" name="member_id" value="<c:out value='test' />">
+						<input type="hidden" name="member_id" value="<c:out value='${sessionScope.member.member_id }' />">
 						<input type="submit" value="댓글 달기">
 					</form>
 				</td>

@@ -8,6 +8,9 @@
 <title>게시판</title>
 </head>
 <body>
+	<header style="float:right">
+		<c:choose><c:when test="${sessionScope.member != null }"><c:out value="${sessionScope.member.member_id }" /> 님 <c:if test="${sessionScope.member.user_level == 3 }">(<a href="managerPage">관리자 페이지</a>)</c:if> <a href="editMemberInfo">회원 정보 수정</a> <a href="logout">로그아웃</a></c:when><c:otherwise><a href="login">로그인</a></c:otherwise></c:choose>
+	</header>
 	<h1>게시판</h1>
 	<div style="width:100%;">
 		<table border="1px" style="width:100%;text-align:center; margin:0 auto;">
@@ -33,8 +36,26 @@
 						<c:url var="link" value="/board">
 							<c:param name="board_no" value="${i.board_no }" />
 						</c:url>
-						<td>${i.board_no }</td>
-						<td><a href="${link }">${i.board_title }</a></td>
+						<td>
+							<c:choose>
+								<c:when test="${i.is_notice == true }">
+									<b>공지</b>
+								</c:when>
+								<c:otherwise>
+									${i.board_no }
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${i.is_notice == true }">
+									<b><a href="${link }">${i.board_title }</a></b>
+								</c:when>
+								<c:otherwise>
+									<a href="${link }">${i.board_title }</a>
+								</c:otherwise>
+							</c:choose>	
+						</td>
 						<td>${i.member_id }</td>
 						<td>${i.board_hit }</td>
 						<td>${i.write_date }</td>

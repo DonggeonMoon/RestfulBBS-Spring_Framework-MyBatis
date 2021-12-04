@@ -3,7 +3,7 @@ package com.bbs.DTO;
 import java.sql.Timestamp;
 
 public class Board implements DTO {
-	private int board_no;
+	private long board_no;
 	private String member_id;
 	private String board_title;
 	private String board_content;
@@ -14,8 +14,8 @@ public class Board implements DTO {
 	public Board() {
 		super();
 	}
-
-	public Board(int board_no, String member_id, String board_title, String board_content, int board_hit, Timestamp write_date, boolean is_notice) {
+	
+	public Board(long board_no, String member_id, String board_title, String board_content, int board_hit, Timestamp write_date, boolean is_notice) {
 		super();
 		this.board_no = board_no;
 		this.member_id = member_id;
@@ -26,11 +26,11 @@ public class Board implements DTO {
 		this.is_notice = is_notice;
 	}
 
-	public int getBoard_no() {
+	public long getBoard_no() {
 		return board_no;
 	}
 
-	public void setBoard_no(int board_no) {
+	public void setBoard_no(long board_no) {
 		this.board_no = board_no;
 	}
 
